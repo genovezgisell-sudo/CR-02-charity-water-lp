@@ -1,47 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity: Water - Leadership Movement</title>
+  <style>
+    body {
+      font-family: 'Novia Proxima', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fdfdfd;
+      color: #003366;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    header {
+      background-color: white;
+      color: #003366;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      position: relative;
+      flex-wrap: wrap;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    header .logo {
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+    header .logo:hover {
+      transform: scale(1.05);
+    }
+    nav {
+      display: none;
+      flex-direction: column;
+      background-color: white;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 200px;
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+      z-index: 20;
+    }
+    nav a {
+      color: #003366;
+      text-decoration: none;
+      padding: 1rem;
+      text-align: right;
+      display: block;
+      font-weight: 900;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #77a8bb;
+      color: white;
+      transform: translateX(-5px);
+    }
+    .hamburger {
+      cursor: pointer;
+      font-size: 2rem;
+      color: #003366;
+      background: none;
+      border: none;
+      transition: transform 0.3s ease;
+      z-index: 20;
+    }
+    .hamburger:hover {
+      transform: rotate(90deg);
+    }
+    .show-nav {
+      display: flex;
+    }
+    .hero {
+      background: url('img/eyJidWNrZXQiOiJkcm9wbWFyayIsImtleSI6IjUyMDQzLzAzYzJlMjU0ZDBlMGI4MjZkZjU5ZDhiNGZjNTUyNGI1ZjBiZmMzZDgzMjkzODI2ODE4MWJiMmExNGM0M2U4NDQvcHJldmlldy9aaW1iYWJ3ZV8yMDIyX0NHLTc4NDguanBnIiwiZWRpdHMiOnsicmVzaXplIjp7In.jpg') no-repeat center center/cover;
+      color: white;
+      text-align: left;
+      padding: 8rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h2, .hero h3, .hero a {
+      position: relative;
+      z-index: 1;
+      margin-left: 2rem;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      transition: transform 0.3s ease;
+      color: #77a8bb;
+    }
+    .hero h2:hover {
+      transform: scale(1.05);
+      color: #ffc907;
+    }
+    .hero h3.subheadline {
+      font-size: 1.2rem;
+      max-width: 700px;
+      color: #fdfdfd;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+    }
+    .hero a.btn-primary {
+      margin-left: 2rem;
+    }
+    .btn-primary {
+      background-color: #ffc907;
+      color: #003366;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary:hover {
+      background-color: #77a8bb;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+    }
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    section h3 {
+      color: #003366;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    section h3:hover {
+      color: #77a8bb;
+      transform: scale(1.05);
+    }
+    section p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+    .impact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-top: 6px solid #77a8bb;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background-color: #f0f8fa;
+    }
+    .card img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .card img:hover {
+      transform: rotate(-5deg) scale(1.1);
+    }
+    .card h4 {
+      color: #77a8bb;
+      margin-top: 0.5rem;
+      font-size: 1.3rem;
+    }
+    footer {
+      background:White;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      transition: background-color 0.3s ease;
+    }
+    footer img.logo {
+      width: 60px;
+      display: block;
+      margin: 0 auto 1rem;
+      transition: transform 0.3s ease;
+    }
+    footer img.logo:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+    footer p {
+      margin: 0;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+      color: #77a8bb;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2rem;
+      }
+      .hero h3.subheadline {
+        font-size: 1rem;
+      }
+      section h3 {
+        font-size: 1.5rem;
+      }
+      section p {
+        font-size: 1rem;
+      }
+      .btn-primary {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 5rem 1rem;
+      }
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+      .card img {
+        width: 90px;
+        height: 90px;
+      }
+      .card h4 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
+  <header>
+    <a href="#hero"><img src="img/cw_logo-2.png" alt="Charity Water Logo" class="logo"></a>
+    <button class="hamburger" onclick="document.querySelector('nav').classList.toggle('show-nav')">☰</button>
+    <nav>
+      <a href="#mission">Mission</a>
+      <a href="#impact">Impact</a>
+      <a href="#join">Get Involved</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </header>
 
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
+  <section class="hero" id="hero">
+    <h2>Leadership is Needed to End the Water Crisis</h2>
+    <h3 class="subheadline">Go beyond donating—join charity: water’s global movement and use your leadership to drive measurable, data-backed impact in millions of lives around the world</h3>
+    <a href="#join" class="btn-primary">Join the Movement</a>
+  </section>
 
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
+  <section id="mission">
+    <h3>Our Mission</h3>
+    <p>We’ve transformed over 20 million lives across 29 countries, and we’re just getting started. Your leadership can help end the global water crisis and create lasting impact where it matters most.</p>
+  </section>
 
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <section id="impact">
+    <h3>The Impact</h3>
+    <div class="impact">
+      <div class="card">
+        <a href="#"><img src="img/7666_Ethiopia_2019_CG-.jpg" alt="Lives Transformed"></a>
+        <h4>20M+ Lives Transformed</h4>
+        <p>Every contribution empowers communities with clean, safe water and joy.</p>
+      </div>
+      <div class="card">
+        <a href="#"><img src="img/eyJidWNrZXQiOiJkcm9wbWFyayIsImtleSI6IjUyMDQzL2NmN2ZmYWE0MThmMjBlY2ZlZDRlYTliN2VlODZiMDMzNTVlMGMzYTY2MjZhZGJhNGMzMDVlYzc3MmE3M2M2NzIvcHJldmlldy85MzQyX0V0aGlvcGlhXzIwMTlfQ0ctLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6ey.jpg" alt="Global Reach"></a>
+        <h4>29 Countries</h4>
+        <p>We work globally to bring water where it is needed most.</p>
+      </div>
+      <div class="card">
+        <a href="#"><img src="img/eyJidWNrZXQiOiJkcm9wbWFyayIsImtleSI6IjUyMDQzLzllNjBlYWRiODc0MTczNGE0NjQ3NGI3MGE0MTE3ZjAyOTRiOGEyNDQwZDJiY2ExNDJjNjg0OGE2Y2JmOTM5M2EvcHJldmlldy80NTQ4X0V0aGlvcGlhXzIwMTlfQ0ctLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6ey.jpg" alt="Data-Driven Impact"></a>
+        <h4>Data-Driven Impact</h4>
+        <p>Your support powers measurable, lasting solutions that inspire hope.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <h3>Get Involved</h3>
+    <p>Leadership is more than a donation—it’s action. Partner with us to bring your skills, influence, and vision to the mission. Together, we can spark joy and create change that lasts generations.</p>
+    <a href="#" class="btn-primary">Start Today</a>
+  </section>
+
+  <footer id="footer">
+    <a href="#hero"><img src="img/water-can-transparent.png" alt="Charity Water Logo" class="logo"></a>
+    <p>&copy; 2025 charity: water | Together, we can end the water crisis with joy and hope</p>
+  </footer>
 </body>
 </html>
